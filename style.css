@@ -1,10 +1,4 @@
-body {
-  font-family: sans-serif;
-  padding: 20px;
-  background: #fff9f0;
-}
-
- @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap');
 
         :root {
             /* Navratri 9 Sacred Colors */
@@ -76,7 +70,7 @@ body {
         /* Professional Header */
         header {
             background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(15px);
+            /* backdrop-filter: blur(15px); */
             border-bottom: 1px solid rgba(153, 50, 204, 0.1);
             position: sticky;
             top: 0;
@@ -290,7 +284,7 @@ body {
 
        .product-card {
     background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(10px);
+    /* backdrop-filter: blur(10px); */
     border: 1px solid rgba(153, 50, 204, 0.1);
     border-radius: 15px;
     padding: 25px;
@@ -493,7 +487,7 @@ body {
             width: 100%;
             height: 100%;
             background: rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(10px);
+            /* backdrop-filter: blur(10px); */
             z-index: 3000;
         }
 
@@ -790,18 +784,181 @@ body {
             }
         }
 
-.product-card {
-  border: 1px solid #ccc;
-  padding: 20px;
-  margin: 10px;
-  width: 250px;
-  display: inline-block;
-  vertical-align: top;
-  background: #fff;
-}
 
-.cart-item {
-  border: 1px dashed #aaa;
-  padding: 10px;
-  margin-bottom: 10px;
-}
+
+
+         .user-section {
+           position: relative;
+           margin-left: auto;
+       }
+       
+       .auth-buttons {
+           display: flex;
+           gap: 10px;
+       }
+       
+       .login-btn, .signup-btn {
+           padding: 10px 20px;
+           border: none;
+           border-radius: 25px;
+           font-weight: 600;
+           cursor: pointer;
+           transition: all 0.3s ease;
+       }
+       
+       .login-btn {
+           background: transparent;
+           color: var(--day9-purple);
+           border: 2px solid var(--day9-purple);
+       }
+       
+       .login-btn:hover {
+           background: var(--day9-purple);
+           color: white;
+       }
+       
+       .signup-btn {
+           background: var(--day9-purple);
+           color: white;
+       }
+       
+       .signup-btn:hover {
+           background: var(--day6-red);
+       }
+       
+       .user-info {
+           display: flex;
+           align-items: center;
+           gap: 15px;
+       }
+       
+       .user-greeting {
+           font-weight: 600;
+           color: var(--day9-purple);
+       }
+       
+       .user-dropdown {
+           position: relative;
+       }
+       
+       .user-menu-btn {
+           display: flex;
+           align-items: center;
+           gap: 8px;
+           background: var(--day9-purple);
+           color: white;
+           border: none;
+           padding: 8px 12px;
+           border-radius: 20px;
+           cursor: pointer;
+           transition: all 0.3s ease;
+       }
+       
+       .user-menu-btn:hover {
+           background: var(--day6-red);
+       }
+       
+       .user-initial {
+           width: 30px;
+           height: 30px;
+           background: white;
+           color: var(--day9-purple);
+           border-radius: 50%;
+           display: flex;
+           align-items: center;
+           justify-content: center;
+           font-weight: 700;
+           font-size: 0.9rem;
+       }
+       
+       .dropdown-arrow {
+           font-size: 0.8rem;
+       }
+       
+       .user-dropdown-menu {
+           position: absolute;
+           top: 100%;
+           right: 0;
+           background: white;
+           border-radius: 10px;
+           box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+           min-width: 280px;
+           display: none;
+           z-index: 1000;
+           margin-top: 5px;
+       }
+       
+       .user-profile {
+           display: flex;
+           align-items: center;
+           gap: 15px;
+           padding: 20px;
+       }
+       
+       .user-avatar {
+           width: 50px;
+           height: 50px;
+           background: var(--day9-purple);
+           color: white;
+           border-radius: 50%;
+           display: flex;
+           align-items: center;
+           justify-content: center;
+           font-weight: 700;
+           font-size: 1.2rem;
+       }
+       
+       .user-details {
+           flex: 1;
+       }
+       
+       .user-name {
+           font-weight: 600;
+           color: var(--day9-purple);
+           margin-bottom: 5px;
+       }
+       
+       .user-email {
+           font-size: 0.9rem;
+           color: var(--day3-grey);
+       }
+       
+       .dropdown-divider {
+           border: none;
+           height: 1px;
+           background: #e0e0e0;
+           margin: 0;
+       }
+       
+       .dropdown-item {
+           display: flex;
+           align-items: center;
+           gap: 12px;
+           padding: 12px 20px;
+           text-decoration: none;
+           color: var(--day9-purple);
+           transition: all 0.3s ease;
+       }
+       
+       .dropdown-item:hover {
+           background: #f8f9ff;
+           color: var(--day6-red);
+       }
+       
+       .item-icon {
+           font-size: 1.1rem;
+       }
+       
+       .user-only {
+           display: none;
+       }
+       
+       @media (max-width: 768px) {
+           .user-dropdown-menu {
+               min-width: 250px;
+           }
+           
+           .user-greeting {
+               display: none;
+           }
+       }

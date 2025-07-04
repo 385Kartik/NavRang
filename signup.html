@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sacred Store - Sign Up</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap');
+
+        :root {
+            --day1-yellow: #FFD700;
+            --day2-green: #228B22;
+            --day3-grey: #708090;
+            --day4-orange: #FF8C00;
+            --day5-white: #FFFFFF;
+            --day6-red: #DC143C;
+            --day7-blue: #4169E1;
+            --day8-pink: #FF69B4;
+            --day9-purple: #9932CC;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #2D1B69;
+        }
+
+        .auth-container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+            width: 100%;
+            max-width: 900px;
+            min-height: 600px;
+            display: flex;
+            animation: slideIn 0.6s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .auth-left {
+            flex: 1;
+            background: linear-gradient(135deg, var(--day9-purple), var(--day7-blue));
+            padding: 3rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .auth-left::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: float 20s linear infinite;
+        }
+
+        @keyframes float {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .sacred-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .sacred-tagline {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .auth-illustration {
+            font-size: 6rem;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
+            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3));
+        }
+
+        .auth-right {
+            flex: 1;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .auth-form {
+            width: 100%;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        .form-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .form-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--day9-purple);
+            margin-bottom: 0.5rem;
+        }
+
+        .form-subtitle {
+            color: var(--day3-grey);
+            font-size: 0.9rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--day9-purple);
+            font-size: 0.9rem;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 0.9rem 1rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background: #fafafa;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--day9-purple);
+            background: white;
+            box-shadow: 0 0 0 3px rgba(153, 50, 204, 0.1);
+            transform: translateY(-1px);
+        }
+
+        .form-input.error {
+            border-color: var(--day6-red);
+            background: #fff5f5;
+            animation: shake 0.5s;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+
+        .error-message {
+            color: var(--day6-red);
+            font-size: 0.8rem;
+            margin-top: 0.3rem;
+            display: none;
+        }
+
+        .form-input.error + .error-message {
+            display: block;
+        }
+
+        .otp-container {
+            display: none;
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .otp-container.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .otp-message {
+            background: linear-gradient(135deg, #e8f5e8, #d4edda);
+            color: var(--day2-green);
+            padding: 1rem;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            border: 1px solid var(--day2-green);
+        }
+
+        .otp-inputs {
+            display: flex;
+            gap: 0.5rem;
+            justify-content: center;
+            margin-bottom: 1rem;
+        }
+
+        .otp-input {
+            width: 50px;
+            height: 50px;
+            text-align: center;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            background: #fafafa;
+        }
+
+        .otp-input:focus {
+            outline: none;
+            border-color: var(--day9-purple);
+            box-shadow: 0 0 0 3px rgba(153, 50, 204, 0.1);
+            transform: scale(1.05);
+            background: white;
+        }
+
+        .resend-otp {
+            color: var(--day9-purple);
+            text-decoration: none;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+        }
+
+        .resend-otp:hover {
+            color: var(--day6-red);
+            background: rgba(153, 50, 204, 0.1);
+        }
+
+        .auth-button {
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(135deg, var(--day9-purple), var(--day7-blue));
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 1rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .auth-button:hover:not(:disabled) {
+            background: linear-gradient(135deg, var(--day6-red), var(--day4-orange));
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(153, 50, 204, 0.3);
+        }
+
+        .auth-button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .auth-toggle {
+            text-align: center;
+            margin-top: 1.5rem;
+            color: var(--day3-grey);
+        }
+
+        .auth-toggle a {
+            color: var(--day9-purple);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .auth-toggle a:hover {
+            color: var(--day6-red);
+        }
+
+        .loading {
+            display: none;
+            text-align: center;
+            color: var(--day9-purple);
+            margin-top: 1rem;
+        }
+
+        .loading.active {
+            display: block;
+        }
+
+        .spinner {
+            width: 20px;
+            height: 20px;
+            border: 2px solid #e0e0e0;
+            border-top: 2px solid var(--day9-purple);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            display: inline-block;
+            margin-right: 0.5rem;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .success-message {
+            background: linear-gradient(135deg, #d4edda, #c3e6cb);
+            color: var(--day2-green);
+            padding: 1rem;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            border: 1px solid var(--day2-green);
+            display: none;
+        }
+
+        .success-message.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @media (max-width: 768px) {
+            .auth-container {
+                flex-direction: column;
+                max-width: 400px;
+                margin: 1rem;
+            }
+
+            .auth-left {
+                padding: 2rem;
+                min-height: 200px;
+            }
+
+            .sacred-logo {
+                font-size: 2rem;
+            }
+
+            .auth-illustration {
+                font-size: 4rem;
+            }
+
+            .auth-right {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="auth-container">
+        <div class="auth-left">
+            <div class="auth-illustration">🕉️</div>
+            <h1 class="sacred-logo">Sacred Store</h1>
+            <p class="sacred-tagline">Your Divine Shopping Destination</p>
+        </div>
+
+        <div class="auth-right">
+            <div class="auth-form">
+                <div class="form-header">
+                    <h2 class="form-title">Create Account</h2>
+                    <p class="form-subtitle">Join our sacred community</p>
+                </div>
+
+                <div class="success-message" id="successMessage">
+                    Account created successfully! Redirecting to dashboard...
+                </div>
+
+                <form id="signupForm">
+                    <div class="form-group">
+                        <label class="form-label" for="name">Full Name</label>
+                        <input type="text" id="name" class="form-input" placeholder="Enter your full name" required>
+                        <div class="error-message">Please enter your full name</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="phone">Phone Number</label>
+                        <input type="tel" id="phone" class="form-input" placeholder="Enter your phone number" required>
+                        <div class="error-message">Please enter a valid phone number</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="email">Email Address</label>
+                        <input type="email" id="email" class="form-input" placeholder="Enter your email address" required>
+                        <div class="error-message">Please enter a valid email address</div>
+                    </div>
+
+                    <div class="otp-container" id="otpContainer">
+                        <div class="otp-message" id="otpMessage">
+                            OTP sent to your phone number. Please enter the 6-digit code to continue.
+                        </div>
+                        <div class="otp-inputs">
+                            <input type="text" class="otp-input" maxlength="1" pattern="[0-9]">
+                            <input type="text" class="otp-input" maxlength="1" pattern="[0-9]">
+                            <input type="text" class="otp-input" maxlength="1" pattern="[0-9]">
+                            <input type="text" class="otp-input" maxlength="1" pattern="[0-9]">
+                            <input type="text" class="otp-input" maxlength="1" pattern="[0-9]">
+                            <input type="text" class="otp-input" maxlength="1" pattern="[0-9]">
+                        </div>
+                        <a href="#" class="resend-otp" onclick="resendOTP()">Resend OTP</a>
+                    </div>
+
+                    <button type="submit" class="auth-button" id="signupBtn">Send OTP</button>
+                </form>
+
+                <div class="loading" id="loading">
+                    <div class="spinner"></div>
+                    Processing your request...
+                </div>
+
+                <div class="auth-toggle">
+                    Already have an account? <a href="index.html">Login here</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentStep = 'form'; // 'form', 'otp', or 'verified'
+        let otpVerified = false;
+        let userData = {};
+
+        // Form validation
+        function validateForm() {
+            const name = document.getElementById('name').value.trim();
+            const phone = document.getElementById('phone').value.trim();
+            const email = document.getElementById('email').value.trim();
+            
+            let isValid = true;
+            
+            // Reset previous errors
+            document.querySelectorAll('.form-input').forEach(input => {
+                input.classList.remove('error');
+            });
+            
+            // Name validation
+            if (!name || name.length < 2) {
+                document.getElementById('name').classList.add('error');
+                isValid = false;
+            }
+            
+            // Phone validation (Indian format)
+            const phoneRegex = /^[6-9]\d{9}$/;
+            if (!phoneRegex.test(phone)) {
+                document.getElementById('phone').classList.add('error');
+                isValid = false;
+            }
+            
+            // Email validation
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                document.getElementById('email').classList.add('error');
+                isValid = false;
+            }
+            
+            return isValid;
+        }
+
+        // OTP Input handling
+        function setupOTPInputs() {
+            const otpInputs = document.querySelectorAll('.otp-input');
+            
+            otpInputs.forEach((input, index) => {
+                input.addEventListener('input', function(e) {
+                    // Only allow numbers
+                    e.target.value = e.target.value.replace(/\D/g, '');
+                    
+                    if (e.target.value.length === 1) {
+                        if (index < otpInputs.length - 1) {
+                            otpInputs[index + 1].focus();
+                        }
+                    }
+                    
+                    // Check if OTP is complete
+                    checkOTPComplete();
+                });
+                
+                input.addEventListener('keydown', function(e) {
+                    if (e.key === 'Backspace' && e.target.value === '') {
+                        if (index > 0) {
+                            otpInputs[index - 1].focus();
+                        }
+                    }
+                });
+            });
+        }
+
+        // Check if OTP is complete and trigger verification
+        function checkOTPComplete() {
+            const otp = getOTPValue();
+            if (otp.length === 6) {
+                verifyOTP(otp);
+            }
+        }
+
+        // Get OTP value
+        function getOTPValue() {
+            const otpInputs = document.querySelectorAll('.otp-input');
+            return Array.from(otpInputs).map(input => input.value).join('');
+        }
+
+        // Clear OTP inputs
+        function clearOTPInputs() {
+            document.querySelectorAll('.otp-input').forEach(input => {
+                input.value = '';
+            });
+        }
+
+        // Send OTP to backend
+        async function sendOTPToBackend(phone, email) {
+            try {
+                const response = await fetch('/api/send-otp', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ phone, email })
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok) {
+                    return { success: true, message: data.message };
+                } else {
+                    return { success: false, message: data.message || 'Failed to send OTP' };
+                }
+            } catch (error) {
+                console.error('Error sending OTP:', error);
+                return { success: false, message: 'Network error. Please try again.' };
+            }
+        }
+
+        // Verify OTP with backend
+        async function verifyOTP(otp) {
+            try {
+                showLoading(true);
+                
+                const response = await fetch('/api/verify-otp', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ 
+                        phone: userData.phone, 
+                        email: userData.email, 
+                        otp: otp 
+                    })
+                });
+                
+                const data = await response.json();
+                showLoading(false);
+                
+                if (response.ok && data.valid) {
+                    // OTP verified successfully
+                    otpVerified = true;
+                    document.getElementById('signupBtn').textContent = 'Create Account';
+                    document.getElementById('signupBtn').disabled = false;
+                    document.getElementById('otpMessage').innerHTML = '✅ OTP verified! Click "Create Account" to complete registration.';
+                    document.getElementById('otpMessage').style.background = 'linear-gradient(135deg, #d4edda, #c3e6cb)';
+                    currentStep = 'verified';
+                } else {
+                    // Invalid OTP
+                    document.getElementById('otpMessage').innerHTML = '❌ Invalid OTP. Please try again.';
+                    document.getElementById('otpMessage').style.background = 'linear-gradient(135deg, #f8d7da, #f5c6cb)';
+                    document.getElementById('otpMessage').style.color = 'var(--day6-red)';
+                    clearOTPInputs();
+                    document.querySelector('.otp-input').focus();
+                }
+            } catch (error) {
+                console.error('Error verifying OTP:', error);
+                showLoading(false);
+                document.getElementById('otpMessage').innerHTML = '❌ Network error. Please try again.';
+                document.getElementById('otpMessage').style.background = 'linear-gradient(135deg, #f8d7da, #f5c6cb)';
+                document.getElementById('otpMessage').style.color = 'var(--day6-red)';
+            }
+        }
+
+        // Create user account
+        async function createUserAccount() {
+            try {
+                showLoading(true);
+                
+                const response = await fetch('/api/create-account', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(userData)
+                });
+                
+                const data = await response.json();
+                showLoading(false);
+                
+                if (response.ok) {
+                    // Account created successfully
+                    document.getElementById('successMessage').classList.add('active');
+                    document.getElementById('signupForm').style.display = 'none';
+                    
+                    // Store user session
+                    sessionStorage.setItem('userLoggedIn', 'true');
+                    sessionStorage.setItem('userName', userData.name);
+                    sessionStorage.setItem('userEmail', userData.email);
+                    
+                    // Redirect to dashboard
+                    setTimeout(() => {
+                        window.location.href = 'dashboard.html';
+                    }, 2000);
+                } else {
+                    alert(data.message || 'Failed to create account. Please try again.');
+                }
+            } catch (error) {
+                console.error('Error creating account:', error);
+                showLoading(false);
+                alert('Network error. Please try again.');
+            }
+        }
+
+        // Show loading state
+        function showLoading(show) {
+            document.getElementById('loading').classList.toggle('active', show);
+            document.getElementById('signupBtn').disabled = show;
+        }
+
+        // Signup form submission
+        document.getElementById('signupForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            if (currentStep === 'form') {
+                // Step 1: Validate form and send OTP
+                if (!validateForm()) {
+                    return;
+                }
+                
+                showLoading(true);
+                
+                // Store user data
+                userData = {
+                    name: document.getElementById('name').value.trim(),
+                    phone: document.getElementById('phone').value.trim(),
+                    email: document.getElementById('email').value.trim()
+                };
+                
+                // Send OTP to backend
+                const result = await sendOTPToBackend(userData.phone, userData.email);
+                showLoading(false);
+                
+                if (result.success) {
+                    // Show OTP container
+                    document.getElementById('otpContainer').classList.add('active');
+                    document.getElementById('signupBtn').textContent = 'Verifying OTP...';
+                    document.getElementById('signupBtn').disabled = true;
+                    currentStep = 'otp';
+                    
+                    // Disable form inputs
+                    document.querySelectorAll('.form-input').forEach(input => {
+                        input.disabled = true;
+                    });
+                    
+                    // Focus first OTP input
+                    document.querySelector('.otp-input').focus();
+                } else {
+                    alert(result.message);
+                }
+                
+            } else if (currentStep === 'verified') {
+                // Step 2: Create account (OTP already verified)
+                await createUserAccount();
+            }
+        });
+
+        // Resend OTP
+        async function resendOTP() {
+            if (!userData.phone || !userData.email) {
+                alert('Please fill the form first');
+                return;
+            }
+            
+            showLoading(true);
+            const result = await sendOTPToBackend(userData.phone, userData.email);
+            showLoading(false);
+            
+            if (result.success) {
+                document.getElementById('otpMessage').innerHTML = 'New OTP sent to your phone number. Please enter the 6-digit code.';
+                document.getElementById('otpMessage').style.background = 'linear-gradient(135deg, #e8f5e8, #d4edda)';
+                document.getElementById('otpMessage').style.color = 'var(--day2-green)';
+                clearOTPInputs();
+                document.querySelector('.otp-input').focus();
+                otpVerified = false;
+                currentStep = 'otp';
+                document.getElementById('signupBtn').textContent = 'Verifying OTP...';
+                document.getElementById('signupBtn').disabled = true;
+            } else {
+                alert(result.message);
+            }
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            setupOTPInputs();
+        });
+    </script>
+</body>
+</html>
