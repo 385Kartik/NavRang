@@ -14,7 +14,7 @@
    <header>
     <div class="container">
         <nav>
-            <a href="#home" class="logo">LUXE NAVRATRI</a>
+            <a href="#home" class="logo">NavRang</a>
             <ul class="nav-links">
                 <li><a href="#home">Home</a></li>
                 <li><a href="#products">Collection</a></li>
@@ -59,7 +59,7 @@
     <section class="hero" id="home">
         <div class="container">
             <div class="hero-content">
-                <h1>Divine Elegance</h1>
+                <h1>NavRang</h1>
                 <h2 class="hero-subtitle">Sacred Navratri Collection</h2>
                 <p>Celebrate the nine divine nights with our premium collection of traditional attire, jewelry, and sacred accessories. Each piece is blessed with the essence of Maa Durga's nine forms.</p>
                 <div class="cta-group">
@@ -213,9 +213,9 @@
 
         // Check if user is logged in
         function checkUserLogin() {
-            const userLoggedIn = sessionStorage.getItem('userLoggedIn');
-            const userName = sessionStorage.getItem('userName');
-            const userEmail = sessionStorage.getItem('userEmail');
+            const userLoggedIn = localStorage.getItem('userLoggedIn');
+            const userName = localStorage.getItem('userName');
+            const userEmail = localStorage.getItem('userEmail');
             
             if (userLoggedIn === 'true') {
                 updateUIForLoggedInUser(userName, userEmail);
@@ -295,11 +295,11 @@
         function logout() {
             const confirmLogout = confirm('Are you sure you want to logout?');
             if (confirmLogout) {
-                sessionStorage.removeItem('userLoggedIn');
-                sessionStorage.removeItem('userName');
-                sessionStorage.removeItem('userEmail');
-                sessionStorage.removeItem('userPhone');
-                sessionStorage.removeItem('authToken');
+                localStorage.removeItem('userLoggedIn');
+                localStorage.removeItem('userName');
+                localStorage.removeItem('userEmail');
+                localStorage.removeItem('userPhone');
+                localStorage.removeItem('authToken');
                 
                 cart = [];
                 updateCartUI();
@@ -370,9 +370,9 @@
 
         // Demo function to simulate login
         function simulateLogin() {
-            sessionStorage.setItem('userLoggedIn', 'true');
-            sessionStorage.setItem('userName', 'Priya Sharma');
-            sessionStorage.setItem('userEmail', 'priya@example.com');
+            localStorage.setItem('userLoggedIn', 'true');
+            localStorage.setItem('userName', 'Priya Sharma');
+            localStorage.setItem('userEmail', 'priya@example.com');
             checkUserLogin();
             showNotification('Welcome back, Priya! 🕉️');
         }
@@ -571,20 +571,58 @@ function renderProducts() {
             modal.style.display = modal.style.display === 'block' ? 'none' : 'block';
         }
 
-        function checkout() {
-            if (cart.length === 0) {
-                alert('Your cart is empty!');
-                return;
-            }
-            
-            const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-            alert(`🕉️ Divine Checkout\n\nTotal: ₹${total.toLocaleString()}\nItems: ${cartCount}\n\nMay Maa Durga bless your purchase!\n\nRedirecting to payment...`);
-            
-            // Reset cart after checkout
-            cart = [];
-            updateCartUI();
-            toggleCart();
-        }
+       function checkout() {
+    const userLoggedIn = localStorage.getItem('userLoggedIn');
+
+    if (userLoggedIn !== 'true') {
+        alert('Please login to proceed with checkout.');
+        redirectToLogin();
+        return;
+    }
+
+    if (cart.length === 0) {
+        alert('Your cart is empty!');
+        return;
+    }
+
+    const authToken = localStorage.getItem('authToken');
+    const userName = localStorage.getItem('userName');
+    const userEmail = localStorage.getItem('userEmail');
+
+    const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+
+   
+    alert(`🕉️ Divine Checkout\n\nCustomer: ${userName}\nEmail: ${userEmail}\nTotal: ₹${total.toLocaleString()}\nItems: ${cartCount}\n\nMay Maa Durga bless your purchase!\n\nRedirecting to payment...`);
+
+ 
+    fetch('https://your-api.com/place-order', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${authToken}`
+        },
+        body: JSON.stringify({
+            userName: userName,
+            userEmail: userEmail,
+            cart: cart,
+            totalAmount: total
+        })
+    })
+    .then(res => res.json())
+    .then(data => {
+        console.log('Order successful:', data);
+        showNotification('Your sacred order was placed successfully! 🪔');
+        
+        // Clear cart after successful order
+        cart = [];
+        updateCartUI();
+        toggleCart();
+    })
+    .catch(error => {
+        console.error('Order error:', error);
+        showNotification('Something went wrong during checkout. Try again. 🙏', 'error');
+    });
+}
 
         function scrollToProducts() {
             document.getElementById('products').scrollIntoView({ behavior: 'smooth' });
@@ -641,10 +679,11 @@ function renderProducts() {
 
         // Check if user is logged in
 function checkUserLogin() {
-   const userLoggedIn = sessionStorage.getItem('userLoggedIn');
-   const userName = sessionStorage.getItem('userName');
-   const userEmail = sessionStorage.getItem('userEmail');
-   
+   const userLoggedIn = localStorage.getItem('userLoggedIn');
+   const userName = localStorage.getItem('userName');
+   const userEmail = localStorage.getItem('userEmail');
+   const authToken = localStorage.setItem('authToken', token);
+
    if (userLoggedIn === 'true') {
        // User is logged in, show user info
        updateUIForLoggedInUser(userName, userEmail);
@@ -752,11 +791,11 @@ function logout() {
    const confirmLogout = confirm('Are you sure you want to logout?');
    if (confirmLogout) {
        // Clear session storage
-       sessionStorage.removeItem('userLoggedIn');
-       sessionStorage.removeItem('userName');
-       sessionStorage.removeItem('userEmail');
-       sessionStorage.removeItem('userPhone');
-       sessionStorage.removeItem('authToken');
+       localStorage.removeItem('userLoggedIn');
+       localStorage.removeItem('userName');
+       localStorage.removeItem('userEmail');
+       localStorage.removeItem('userPhone');
+       localStorage.removeItem('authToken');
        
        // Clear cart
        cart = [];
@@ -793,7 +832,7 @@ function hideUserFeatures() {
 
 // Enhanced add to cart function with login check
 function addToCart(productId) {
-   const userLoggedIn = sessionStorage.getItem('userLoggedIn');
+   const userLoggedIn = localStorage.getItem('userLoggedIn');
    
    if (userLoggedIn !== 'true') {
        const shouldLogin = confirm('Please login to add items to cart. Would you like to login now?');
@@ -818,30 +857,59 @@ function addToCart(productId) {
 
 // Enhanced checkout function
 function checkout() {
-   const userLoggedIn = sessionStorage.getItem('userLoggedIn');
+    const userLoggedIn = localStorage.getItem('userLoggedIn');
+    const authToken = localStorage.getItem('authToken');
+    const userName = localStorage.getItem('userName');
+    const userEmail = localStorage.getItem('userEmail');
+
+    // User not logged in
+    if (userLoggedIn !== 'true' || !authToken) {
+        alert('Please login using OTP to proceed.');
+        redirectToLogin();
+        return;
+    }
+
    
-   if (userLoggedIn !== 'true') {
-       alert('Please login to proceed with checkout.');
-       redirectToLogin();
-       return;
-   }
+    if (cart.length === 0) {
+        alert('Your cart is empty!');
+        return;
+    }
+
+    const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+
    
-   if (cart.length === 0) {
-       alert('Your cart is empty!');
-       return;
-   }
-   
-   const userName = sessionStorage.getItem('userName');
-   const userEmail = sessionStorage.getItem('userEmail');
-   const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-   
-   alert(`🕉️ Divine Checkout\n\nCustomer: ${userName || 'Sacred Soul'}\nEmail: ${userEmail || ''}\nTotal: ₹${total.toLocaleString()}\nItems: ${cartCount}\n\nMay Maa Durga bless your purchase!\n\nRedirecting to payment...`);
-   
-   // Reset cart after checkout
-   cart = [];
-   updateCartUI();
-   toggleCart();
+    fetch('https://your-api.com/place-order', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${authToken}` // 🔐 Token from localStorage
+        },
+        body: JSON.stringify({
+            userName: userName,
+            userEmail: userEmail,
+            cart: cart,
+            totalAmount: total
+        })
+    })
+    .then(res => {
+        if (!res.ok) throw new Error('Order failed or unauthorized');
+        return res.json();
+    })
+    .then(data => {
+        console.log('Order successful:', data);
+        showNotification('Your sacred order was placed successfully! 🪔');
+        
+        // Clear cart
+        cart = [];
+        updateCartUI();
+        toggleCart();
+    })
+    .catch(error => {
+        console.error('Order error:', error);
+        showNotification('Something went wrong during checkout. Try again. 🙏', 'error');
+    });
 }
+
 
 // Enhanced notification system
 function showNotification(message, type = 'success') {
