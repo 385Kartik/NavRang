@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sacred Store - Sign Up</title>
+    <title>NavRang | Sign Up</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap');
 
@@ -422,6 +422,8 @@
                         <div class="error-message">Please enter a valid email address</div>
                     </div>
 
+<!-- <button id="log">log</button>  Just for testing -->
+
                     <div class="otp-container" id="otpContainer">
                         <div class="otp-message" id="otpMessage">
                             OTP sent to your phone number. Please enter the 6-digit code to continue.
@@ -492,6 +494,14 @@
             
             return isValid;
         }
+
+// let log = document.getElementById('log');
+// log.addEventListener('click', function() {
+//     let name = document.getElementById('name').value.trim();
+//     let phone = document.getElementById('phone').value.trim();
+//     let email = document.getElementById('email').value.trim();
+// });   Testing Purpose
+
 
         // OTP Input handling
         function setupOTPInputs() {
@@ -638,6 +648,9 @@
                     sessionStorage.setItem('userName', userData.name);
                     sessionStorage.setItem('userEmail', userData.email);
                     
+
+console.log("Email entered:", userData.email);
+
                     // Redirect to dashboard
                     setTimeout(() => {
                         window.location.href = 'dashboard.html';

@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NavRang | Login</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap');
+
+        :root {
+            --day1-yellow: #FFD700;
+            --day2-green: #228B22;
+            --day3-grey: #708090;
+            --day4-orange: #FF8C00;
+            --day5-white: #FFFFFF;
+            --day6-red: #DC143C;
+            --day7-blue: #4169E1;
+            --day8-pink: #FF69B4;
+            --day9-purple: #9932CC;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #2D1B69;
+        }
+
+        .auth-container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+            width: 100%;
+            max-width: 900px;
+            min-height: 600px;
+            display: flex;
+            animation: slideIn 0.6s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .auth-left {
+            flex: 1;
+            background: linear-gradient(135deg, var(--day7-blue), var(--day9-purple));
+            padding: 3rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .auth-left::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
+            background-size: 40px 40px;
+            animation: float 25s linear infinite;
+        }
+
+        @keyframes float {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .sacred-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .sacred-tagline {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .auth-illustration {
+            font-size: 6rem;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
+            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3));
+        }
+
+        .auth-right {
+            flex: 1;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .auth-form {
+            width: 100%;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        .form-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .form-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--day9-purple);
+            margin-bottom: 0.5rem;
+        }
+
+        .form-subtitle {
+            color: var(--day3-grey);
+            font-size: 0.9rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--day9-purple);
+            font-size: 0.9rem;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 0.9rem 1rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background: #fafafa;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--day9-purple);
+            background: white;
+            box-shadow: 0 0 0 3px rgba(153, 50, 204, 0.1);
+            transform: translateY(-1px);
+        }
+
+        .form-input.error {
+            border-color: var(--day6-red);
+            background: #fff5f5;
+            animation: shake 0.5s;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+
+        .error-message {
+            color: var(--day6-red);
+            font-size: 0.8rem;
+            margin-top: 0.3rem;
+            display: none;
+        }
+
+        .form-input.error + .error-message {
+            display: block;
+        }
+
+        .forgot-password {
+            text-align: right;
+            margin-top: 0.5rem;
+        }
+
+        .forgot-password a {
+            color: var(--day9-purple);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+        }
+
+        .forgot-password a:hover {
+            color: var(--day6-red);
+        }
+
+        .auth-button {
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(135deg, var(--day7-blue), var(--day9-purple));
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 1rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .auth-button:hover:not(:disabled) {
+            background: linear-gradient(135deg, var(--day4-orange), var(--day6-red));
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(153, 50, 204, 0.3);
+        }
+
+        .auth-button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .auth-toggle {
+            text-align: center;
+            margin-top: 1.5rem;
+            color: var(--day3-grey);
+        }
+
+        .auth-toggle a {
+            color: var(--day9-purple);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .auth-toggle a:hover {
+            color: var(--day6-red);
+        }
+
+        .loading {
+            display: none;
+            text-align: center;
+            color: var(--day9-purple);
+            margin-top: 1rem;
+        }
+
+        .loading.active {
+            display: block;
+        }
+
+        .spinner {
+            width: 20px;
+            height: 20px;
+            border: 2px solid #e0e0e0;
+            border-top: 2px solid var(--day9-purple);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            display: inline-block;
+            margin-right: 0.5rem;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .success-message {
+            background: linear-gradient(135deg, #d4edda, #c3e6cb);
+            color: var(--day2-green);
+            padding: 1rem;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            border: 1px solid var(--day2-green);
+            display: none;
+        }
+
+        .success-message.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .error-alert {
+            background: linear-gradient(135deg, #f8d7da, #f5c6cb);
+            color: var(--day6-red);
+            padding: 1rem;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            border: 1px solid var(--day6-red);
+            display: none;
+        }
+
+        .error-alert.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @media (max-width: 768px) {
+            .auth-container {
+                flex-direction: column;
+                max-width: 400px;
+                margin: 1rem;
+            }
+
+            .auth-left {
+                padding: 2rem;
+                min-height: 200px;
+            }
+
+            .sacred-logo {
+                font-size: 2rem;
+            }
+
+            .auth-illustration {
+                font-size: 4rem;
+            }
+
+            .auth-right {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="auth-container">
+        <div class="auth-left">
+            <div class="auth-illustration">🕉️</div>
+            <h1 class="sacred-logo">Sacred Store</h1>
+            <p class="sacred-tagline">Welcome Back to Your Divine Journey</p>
+        </div>
+
+        <div class="auth-right">
+            <div class="auth-form">
+                <div class="form-header">
+                    <h2 class="form-title">Welcome Back</h2>
+                    <p class="form-subtitle">Login to your sacred account</p>
+                </div>
+
+                <div class="success-message" id="successMessage">
+                    Login successful! Redirecting to dashboard...
+                </div>
+
+                <div class="error-alert" id="errorAlert">
+                    Invalid credentials. Please try again.
+                </div>
+
+                <form id="loginForm">
+                    <div class="form-group">
+                        <label class="form-label" for="email">Email Address</label>
+                        <input type="email" id="email" class="form-input" placeholder="Enter your email address" required>
+                        <div class="error-message">Please enter a valid email address</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="password">Password</label>
+                        <input type="password" id="password" class="form-input" placeholder="Enter your password" required>
+                        <div class="error-message">Please enter your password</div>
+                        <div class="forgot-password">
+                            <a href="forgot-password.html">Forgot Password?</a>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="auth-button" id="loginBtn">Login</button>
+                </form>
+
+                <div class="loading" id="loading">
+                    <div class="spinner"></div>
+                    Authenticating...
+                </div>
+
+                <div class="auth-toggle">
+                    Don't have an account? <a href="signup.html">Sign up here</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Form validation
+        function validateForm() {
+            const email = document.getElementById('email').value.trim();
+            const password = document.getElementById('password').value.trim();
+            
+            let isValid = true;
+            
+            // Reset previous errors
+            document.querySelectorAll('.form-input').forEach(input => {
+                input.classList.remove('error');
+            });
+            
+            // Hide previous alerts
+            document.getElementById('errorAlert').classList.remove('active');
+            
+            // Email validation
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                document.getElementById('email').classList.add('error');
+                isValid = false;
+            }
+            
+            // Password validation
+            if (!password || password.length < 1) {
+                document.getElementById('password').classList.add('error');
+                isValid = false;
+            }
+            
+            return isValid;
+        }
+
+        // Login user
+        async function loginUser(email, password) {
+            try {
+                const response = await fetch('/api/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ email, password })
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok) {
+                    return { success: true, user: data.user, token: data.token };
+                } else {
+                    return { success: false, message: data.message || 'Login failed' };
+                }
+            } catch (error) {
+                console.error('Error during login:', error);
+                return { success: false, message: 'Network error. Please try again.' };
+            }
+        }
+
+        // Show loading state
+        function showLoading(show) {
+            document.getElementById('loading').classList.toggle('active', show);
+            document.getElementById('loginBtn').disabled = show;
+        }
+
+        // Show error alert
+        function showError(message) {
+            document.getElementById('errorAlert').textContent = message;
+            document.getElementById('errorAlert').classList.add('active');
+            setTimeout(() => {
+                document.getElementById('errorAlert').classList.remove('active');
+            }, 5000);
+        }
+
+        // Login form submission
+        document.getElementById('loginForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            if (!validateForm()) {
+                return;
+            }
+            
+            showLoading(true);
+            
+            const email = document.getElementById('email').value.trim();
+            const password = document.getElementById('password').value.trim();
+            
+            const result = await loginUser(email, password);
+            showLoading(false);
+            
+            if (result.success) {
+                // Login successful
+                document.getElementById('successMessage').classList.add('active');
+                document.getElementById('loginForm').style.display = 'none';
+                
+                // Store user session
+                localStorage.setItem('userLoggedIn', 'true');
+                localStorage.setItem('userEmail', email);
+                if (result.user) {
+                    localStorage.setItem('userName', result.user.name || '');
+                    localStorage.setItem('userPhone', result.user.phone || '');
+                }
+                if (result.token) {
+                    localStorage.setItem('authToken', result.token);
+                }
+                
+                // Redirect to dashboard
+                setTimeout(() => {
+                    window.location.href = 'dashboard.html';
+                }, 2000);
+            } else {
+                // Login failed
+                showError(result.message);
+            }
+        });
+
+        // Auto-fill form if user data exists (for demo purposes)
+        document.addEventListener('DOMContentLoaded', function() {
+            const savedEmail = localStorage.getItem('userEmail');
+            if (savedEmail) {
+                document.getElementById('email').value = savedEmail;
+            }
+        });
+    </script>
+</body>
+</html>
