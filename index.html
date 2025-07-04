@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Divine Store</title>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <h1>🕉️ Navratri Divine Collection</h1>
+  
+  <div>
+    <button onclick="login()">Login</button>
+    <button onclick="logout()">Logout</button>
+    <button onclick="window.location.href='cart.html'">🛒 Sacred Cart</button>
+    <span id="userEmail"></span>
+  </div>
+
+  <div id="productsGrid" class="grid-container"></div>
+
+  <script src="firebase-config.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

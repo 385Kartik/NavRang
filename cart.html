@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Sacred Cart</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap');
+
+        :root {
+            /* Navratri 9 Sacred Colors */
+            --day1-yellow: #FFD700;      /* Shailaputri - Yellow */
+            --day2-green: #228B22;       /* Brahmacharini - Green */
+            --day3-grey: #708090;        /* Chandraghanta - Grey */
+            --day4-orange: #FF8C00;      /* Kushmanda - Orange */
+            --day5-white: #FFFFFF;       /* Skandamata - White */
+            --day6-red: #DC143C;         /* Katyayani - Red */
+            --day7-blue: #4169E1;        /* Kalaratri - Royal Blue */
+            --day8-pink: #FF69B4;        /* Mahagauri - Pink */
+            --day9-purple: #9932CC;      /* Siddhidatri - Purple */
+            
+            /* Divine Premium Gradients */
+            --gradient-primary: linear-gradient(135deg, var(--day1-yellow), var(--day4-orange), var(--day6-red));
+            --gradient-secondary: linear-gradient(135deg, var(--day7-blue), var(--day9-purple), var(--day8-pink));
+            --gradient-divine: linear-gradient(45deg, var(--day1-yellow), var(--day2-green), var(--day4-orange), var(--day6-red), var(--day7-blue), var(--day8-pink), var(--day9-purple));
+            --gradient-royal: linear-gradient(135deg, var(--day9-purple), var(--day6-red), var(--day1-yellow));
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: #2D1B69;
+            background: #f8f9fa;
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Sacred Cart Container */
+        .cart-container {
+            position: relative;
+            z-index: 1;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Sacred Header */
+        .sacred-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .sacred-header::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--gradient-divine);
+            z-index: -1;
+            opacity: 0.3;
+        }
+
+        .sacred-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            font-weight: 800;
+            background: var(--gradient-royal);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 4px 20px rgba(153, 50, 204, 0.3);
+            margin-bottom: 1rem;
+            display: inline-block;
+            position: relative;
+            padding: 0 2rem;
+            background-color: var(--day5-white);
+            border-radius: 50px;
+            animation: title-glow 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes title-glow {
+            0% { text-shadow: 0 4px 20px rgba(153, 50, 204, 0.3); }
+            100% { text-shadow: 0 4px 30px rgba(153, 50, 204, 0.6), 0 0 60px rgba(255, 215, 0, 0.2); }
+        }
+
+        .sacred-subtitle {
+            font-size: 1.2rem;
+            color: var(--day9-purple);
+            font-weight: 500;
+            opacity: 0.8;
+        }
+
+        /* Cart Items Container */
+        .cart-items-container {
+            background: white;
+            border-radius: 15px;
+            padding: 1.5rem;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            margin-bottom: 1.5rem;
+            border: 1px solid #e0e0e0;
+        }
+
+        /* Cart Item */
+        .cart-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            background: #fafafa;
+            border-radius: 12px;
+            margin-bottom: 1rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            border-left: 3px solid var(--day1-yellow);
+        }
+
+        .cart-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .item-image {
+            width: 60px;
+            height: 60px;
+            border-radius: 10px;
+            object-fit: cover;
+            border: 2px solid var(--day1-yellow);
+        }
+
+        .item-details {
+            flex: 1;
+        }
+
+        .item-name {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--day9-purple);
+            margin-bottom: 0.3rem;
+        }
+
+        .item-description {
+            color: var(--day3-grey);
+            font-size: 0.85rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .item-price {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--day6-red);
+        }
+
+        .quantity-controls {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(255, 215, 0, 0.1);
+            padding: 0.3rem 0.8rem;
+            border-radius: 10px;
+            border: 1px solid var(--day1-yellow);
+        }
+
+        .quantity-btn {
+            background: var(--day1-yellow);
+            color: #333;
+            border: none;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .quantity-btn:hover {
+            transform: scale(1.1);
+            background: var(--day4-orange);
+            color: white;
+        }
+
+        .quantity-number {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--day9-purple);
+            min-width: 25px;
+            text-align: center;
+        }
+
+        .remove-btn {
+            background: var(--day6-red);
+            color: white;
+            border: none;
+            padding: 0.4rem 0.8rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .remove-btn:hover {
+            background: #B22222;
+            transform: scale(1.05);
+        }
+
+        /* Total Section */
+        .total-section {
+            background: white;
+            border: 2px solid var(--day9-purple);
+            color: var(--day9-purple);
+            padding: 1.5rem;
+            border-radius: 15px;
+            text-align: center;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 5px 20px rgba(153, 50, 204, 0.1);
+        }
+
+        .total-label {
+            font-size: 1.2rem;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+
+        .total-amount {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: var(--day6-red);
+        }
+
+        /* Action Buttons */
+        .action-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .checkout-btn {
+            background: var(--day9-purple);
+            color: white;
+            border: none;
+            padding: 0.8rem 2rem;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(153, 50, 204, 0.3);
+        }
+
+        .checkout-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(153, 50, 204, 0.4);
+            background: var(--day6-red);
+        }
+
+        .back-btn {
+            background: white;
+            color: var(--day9-purple);
+            border: 2px solid var(--day9-purple);
+            padding: 0.8rem 1.5rem;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .back-btn:hover {
+            background: var(--day9-purple);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* Empty Cart State */
+        .empty-cart {
+            text-align: center;
+            padding: 4rem 2rem;
+            color: var(--day3-grey);
+        }
+
+        .empty-cart-icon {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            opacity: 0.5;
+        }
+
+        .empty-cart-text {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .cart-container {
+                padding: 1rem;
+            }
+
+            .sacred-title {
+                font-size: 2.5rem;
+            }
+
+            .cart-item {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .item-image {
+                width: 120px;
+                height: 120px;
+            }
+
+            .action-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .checkout-btn,
+            .back-btn {
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="cart-container">
+        <div class="sacred-header">
+            <h1 class="sacred-title">🛍️ Sacred Cart</h1>
+            <p class="sacred-subtitle">Your Divine Shopping Collection</p>
+        </div>
+
+        <div class="cart-items-container">
+            <div id="cartItems">
+                <!-- Sample cart items for demonstration -->
+                <div class="cart-item">
+                    <img src="https://via.placeholder.com/80x80/FFD700/000000?text=🕉️" alt="Sacred Item" class="item-image">
+                    <div class="item-details">
+                        <h3 class="item-name">Divine Brass Diya</h3>
+                        <p class="item-description">Traditional handcrafted brass diya for sacred ceremonies</p>
+                        <p class="item-price">₹299</p>
+                    </div>
+                    <div class="quantity-controls">
+                        <button class="quantity-btn" onclick="changeQuantity(1, -1)">-</button>
+                        <span class="quantity-number" id="qty-1">2</span>
+                        <button class="quantity-btn" onclick="changeQuantity(1, 1)">+</button>
+                    </div>
+                    <button class="remove-btn" onclick="removeItem(1)">Remove</button>
+                </div>
+
+                <div class="cart-item">
+                    <img src="https://via.placeholder.com/80x80/FF8C00/000000?text=🌺" alt="Sacred Item" class="item-image">
+                    <div class="item-details">
+                        <h3 class="item-name">Sacred Incense Sticks</h3>
+                        <p class="item-description">Premium sandalwood incense for meditation and prayers</p>
+                        <p class="item-price">₹150</p>
+                    </div>
+                    <div class="quantity-controls">
+                        <button class="quantity-btn" onclick="changeQuantity(2, -1)">-</button>
+                        <span class="quantity-number" id="qty-2">1</span>
+                        <button class="quantity-btn" onclick="changeQuantity(2, 1)">+</button>
+                    </div>
+                    <button class="remove-btn" onclick="removeItem(2)">Remove</button>
+                </div>
+
+                <div class="cart-item">
+                    <img src="https://via.placeholder.com/80x80/9932CC/000000?text=📿" alt="Sacred Item" class="item-image">
+                    <div class="item-details">
+                        <h3 class="item-name">Rudraksha Mala</h3>
+                        <p class="item-description">108 beads genuine Rudraksha mala for spiritual practice</p>
+                        <p class="item-price">₹799</p>
+                    </div>
+                    <div class="quantity-controls">
+                        <button class="quantity-btn" onclick="changeQuantity(3, -1)">-</button>
+                        <span class="quantity-number" id="qty-3">1</span>
+                        <button class="quantity-btn" onclick="changeQuantity(3, 1)">+</button>
+                    </div>
+                    <button class="remove-btn" onclick="removeItem(3)">Remove</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="total-section">
+            <div class="total-label">Sacred Total</div>
+            <div class="total-amount" id="totalAmount">₹1,247</div>
+        </div>
+
+        <div class="action-buttons">
+            <button class="checkout-btn" onclick="checkout()">🙏 Proceed to Sacred Checkout</button>
+            <button class="back-btn" onclick="goBack()">⬅ Continue Sacred Shopping</button>
+        </div>
+    </div>
+
+    <script>
+        // Sample cart data
+        let cartItems = [
+            { id: 1, name: 'Divine Brass Diya', price: 299, quantity: 2 },
+            { id: 2, name: 'Sacred Incense Sticks', price: 150, quantity: 1 },
+            { id: 3, name: 'Rudraksha Mala', price: 799, quantity: 1 }
+        ];
+
+        function changeQuantity(itemId, change) {
+            const item = cartItems.find(item => item.id === itemId);
+            if (item) {
+                item.quantity += change;
+                if (item.quantity <= 0) {
+                    removeItem(itemId);
+                    return;
+                }
+                document.getElementById(`qty-${itemId}`).textContent = item.quantity;
+                updateTotal();
+            }
+        }
+
+        function removeItem(itemId) {
+            cartItems = cartItems.filter(item => item.id !== itemId);
+            
+            // Remove the item from DOM
+            const itemElement = document.querySelector(`#qty-${itemId}`).closest('.cart-item');
+            itemElement.style.transform = 'translateX(-100%)';
+            itemElement.style.opacity = '0';
+            
+            setTimeout(() => {
+                itemElement.remove();
+                updateTotal();
+                
+                // Show empty cart if no items
+                if (cartItems.length === 0) {
+                    showEmptyCart();
+                }
+            }, 300);
+        }
+
+        function updateTotal() {
+            const total = cartItems.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            document.getElementById('totalAmount').textContent = `₹${total.toLocaleString()}`;
+        }
+
+        function showEmptyCart() {
+            document.getElementById('cartItems').innerHTML = `
+                <div class="empty-cart">
+                    <div class="empty-cart-icon">🛒</div>
+                    <div class="empty-cart-text">Your sacred cart is empty</div>
+                    <button class="checkout-btn" onclick="goBack()">Continue Sacred Shopping</button>
+                </div>
+            `;
+        }
+
+        function checkout() {
+            if (cartItems.length === 0) {
+                alert('Your cart is empty. Please add some items first!');
+                return;
+            }
+            
+            alert('Proceeding to sacred checkout... 🙏');
+            // Add your checkout logic here
+        }
+
+        function goBack() {
+            // Replace with your actual navigation logic
+            alert('Returning to sacred shopping... 🛍️');
+            // window.location.href = 'index.html';
+        }
+
+        // Initialize total on page load
+        updateTotal();
+    </script>
+</body>
+</html>

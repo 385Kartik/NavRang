@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LUXE NAVRATRI - Divine Premium Collection</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <script src="script.js"></script>
+
+    <!-- Divine Animated Background -->
+    <div class="divine-bg"></div>
+
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav>
+                <a href="#home" class="logo">NavRang</a>
+                <ul class="nav-links">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#products">Collection</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+                <button class="cart-icon" onclick="toggleCart()">
+                    Cart 🛒
+                    <span class="cart-count">0</span>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-content">
+                <h1>NavRang</h1>
+                <h2 class="hero-subtitle">Sacred Navratri Collection</h2>
+                <p>Celebrate the nine divine nights with our premium collection of traditional attire, jewelry, and sacred accessories. Each piece is blessed with the essence of Maa Durga's nine forms.</p>
+                <div class="cta-group">
+                    <button class="cta-primary" onclick="scrollToProducts()">Explore Collection</button>
+                    <button class="cta-secondary">Learn More</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section class="products-section" id="products">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Divine Collection</h2>
+                <p class="section-description">Nine sacred pieces for nine divine nights. Each item blessed with the colors and essence of Navratri goddesses.</p>
+            </div>
+            
+            <div class="products-grid" id="productsGrid">
+                <!-- Products will be dynamically generated -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">What Our Customers Say</h2>
+                <p class="section-description">Blessed words from our devotees</p>
+            </div>
+            
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"The quality is absolutely divine! I felt blessed wearing these pieces during Navratri. The colors are so vibrant and true to tradition."</p>
+                    <p class="testimonial-author">- Priya Sharma</p>
+                    <div class="testimonial-rating">⭐⭐⭐⭐⭐</div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"Luxe Navratri transformed my celebration. Each piece tells a story of devotion and craftsmanship. Highly recommended!"</p>
+                    <p class="testimonial-author">- Rajesh Patel</p>
+                    <div class="testimonial-rating">⭐⭐⭐⭐⭐</div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"The premium collection is worth every rupee. The attention to detail and spiritual significance is unmatched."</p>
+                    <p class="testimonial-author">- Meera Gupta</p>
+                    <div class="testimonial-rating">⭐⭐⭐⭐⭐</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cart Modal -->
+    <div class="cart-modal" id="cartModal">
+        <div class="cart-content">
+            <div class="cart-header">
+                <h2 class="cart-title">Shopping Cart</h2>
+                <button class="close-cart" onclick="toggleCart()">×</button>
+            </div>
+            <div class="cart-items" id="cartItems">
+                <!-- Cart items will be dynamically generated -->
+            </div>
+            <div class="cart-total">
+                <div class="total-amount" id="totalAmount">₹0</div>
+                <button class="checkout-btn" onclick="checkout()">Proceed to Checkout</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Luxe Navratri</h3>
+                    <p>Celebrating divine traditions with premium quality and spiritual significance. Our mission is to bring the sacred essence of Navratri to every devotee's celebration.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link">📘</a>
+                        <a href="#" class="social-link">📷</a>
+                        <a href="#" class="social-link">🐦</a>
+                        <a href="#" class="social-link">📺</a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li>Home</li>
+                        <li>Divine Collection</li>
+                        <li>About Us</li>
+                        <li>Blog</li>
+                        <li>Contact Us</li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Customer Care</h3>
+                    <ul>
+                        <li>Shipping Info</li>
+                        <li>Return Policy</li>
+                        <li>Size Guide</li>
+                        <li>FAQ</li>
+                        <li>Support</li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <p>📧 hello@luxenavratri.com</p>
+                    <p>📞 +91 98765 43210</p>
+                    <p>📍 Mumbai, Maharashtra, India</p>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 Luxe Navratri. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+
+
+
+</body>
+</html>
